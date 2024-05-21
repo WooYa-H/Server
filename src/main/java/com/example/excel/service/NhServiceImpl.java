@@ -100,6 +100,7 @@ public class NhServiceImpl implements NhService {
         List<Crop> cropData = cropRepository.findByMonth(month);
         List<Nh> nhData = nhRepository.findByMonth(month);
 
+
         for (Nh nh : nhData) {
 
             for (Crop crop : cropData) {
@@ -128,6 +129,8 @@ public class NhServiceImpl implements NhService {
                 }
             }
         }
-        return nhRepository.findByBad("일치");
+        return nhData.stream()
+                .filter(nh -> nh.getBad().equals("일치"))
+                .collect(Collectors.toList());
     }
 }
