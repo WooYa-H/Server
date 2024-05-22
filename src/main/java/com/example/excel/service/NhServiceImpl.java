@@ -6,7 +6,9 @@ import com.example.excel.dto.ExcelDTO;
 import com.example.excel.repository.CropRepository;
 import com.example.excel.repository.NhRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -33,6 +35,19 @@ public class NhServiceImpl implements NhService {
 
                 DataFormatter formatter = new DataFormatter();
                 XSSFRow row = worksheet.getRow(i);
+
+                int emptyCellCount = 0;
+
+                for (int j = 0; j < row.getLastCellNum(); j++) {
+                    XSSFCell cell = row.getCell(j);
+                    if (cell == null || cell.getCellType() == CellType.BLANK) {
+                        emptyCellCount++;
+                    }
+                }
+
+                if (emptyCellCount < 3) {
+                    continue;
+                }
 
                 String item = formatter.formatCellValue(row.getCell(7));
                 String name = formatter.formatCellValue(row.getCell(19));
