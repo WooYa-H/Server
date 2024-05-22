@@ -115,7 +115,6 @@ public class NhServiceImpl implements NhService {
         List<Crop> cropData = cropRepository.findByMonth(month);
         List<Nh> nhData = nhRepository.findByMonth(month);
 
-
         for (Nh nh : nhData) {
 
             for (Crop crop : cropData) {
