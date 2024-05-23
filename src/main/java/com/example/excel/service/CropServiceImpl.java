@@ -29,18 +29,19 @@ public class CropServiceImpl implements CropService{
                 DataFormatter formatter = new DataFormatter();
                 XSSFRow row = worksheet.getRow(i);
 
+
                 int emptyCellCount = 0;
 
-                for (int j = 0; j < row.getLastCellNum(); j++) {
-                    XSSFCell cell = row.getCell(j);
-                    if (cell == null || cell.getCellType() == CellType.BLANK) {
-                        emptyCellCount++;
-                    }
-                }
-
-                if (emptyCellCount < 3) {
-                    continue;
-                }
+//                for (int j = 0; j < row.getLastCellNum(); j++) {
+//                    XSSFCell cell = row.getCell(j);
+//                    if (cell == null || cell.getCellType() == CellType.BLANK) {
+//                        emptyCellCount++;
+//                    }
+//                }
+//
+//                if (emptyCellCount < 1) {
+//                    continue;
+//                }
 
                 String item = formatter.formatCellValue(row.getCell(1));
                 String name = formatter.formatCellValue(row.getCell(16));
