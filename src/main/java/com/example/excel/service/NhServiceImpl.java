@@ -38,6 +38,7 @@ public class NhServiceImpl implements NhService {
 
                 int emptyCellCount = 0;
 
+
                 for (int j = 0; j < row.getLastCellNum(); j++) {
                     XSSFCell cell = row.getCell(j);
                     if (cell == null || cell.getCellType() == CellType.BLANK) {
