@@ -1,4 +1,4 @@
-package com.example.excel.dto;
+package com.example.excel.dto.excel;
 
 import com.example.excel.domain.excel.Crop;
 import lombok.*;

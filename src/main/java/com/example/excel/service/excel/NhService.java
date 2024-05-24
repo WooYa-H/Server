@@ -1,7 +1,7 @@
 package com.example.excel.service.excel;
 
 import com.example.excel.domain.excel.Nh;
-import com.example.excel.dto.ExcelDTO;
+import com.example.excel.dto.excel.ExcelDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

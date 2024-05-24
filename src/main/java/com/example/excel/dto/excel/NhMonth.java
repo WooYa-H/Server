@@ -1,4 +1,4 @@
-package com.example.excel.dto;
+package com.example.excel.dto.excel;
 
 import lombok.Getter;
 

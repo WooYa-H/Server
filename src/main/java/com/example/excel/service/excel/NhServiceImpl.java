@@ -2,7 +2,7 @@ package com.example.excel.service.excel;
 
 import com.example.excel.domain.excel.Crop;
 import com.example.excel.domain.excel.Nh;
-import com.example.excel.dto.ExcelDTO;
+import com.example.excel.dto.excel.ExcelDTO;
 import com.example.excel.repository.excel.CropRepository;
 import com.example.excel.repository.excel.NhRepository;
 import lombok.RequiredArgsConstructor;
