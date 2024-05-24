@@ -1,6 +1,6 @@
-package com.example.excel.service;
+package com.example.excel.service.excel;
 
-import com.example.excel.domain.Nh;
+import com.example.excel.domain.excel.Nh;
 import com.example.excel.dto.ExcelDTO;
 import org.springframework.web.multipart.MultipartFile;
 

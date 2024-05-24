@@ -1,4 +1,4 @@
-package com.example.excel.domain;
+package com.example.excel.domain.excel;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,7 +17,7 @@ public class Nh {
     @Column(name = "nh_id")
     private Long id;
 
-    private String month;
+    private String surveyMonth;
 
     private String item;
 
@@ -35,5 +35,5 @@ public class Nh {
 
     private String contractor;
 
-    private String bad;
+    private String recordMatch;
 }

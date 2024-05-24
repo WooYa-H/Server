@@ -1,8 +1,6 @@
-package com.example.excel.controller;
+package com.example.excel.controller.excel;
 
-import com.example.excel.domain.Crop;
-import com.example.excel.dto.ExcelDTO;
-import com.example.excel.service.CropService;
+import com.example.excel.service.excel.CropService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

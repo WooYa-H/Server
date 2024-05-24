@@ -1,9 +1,8 @@
-package com.example.excel.controller;
+package com.example.excel.controller.excel;
 
-import com.example.excel.domain.Nh;
-import com.example.excel.dto.ExcelDTO;
+import com.example.excel.domain.excel.Nh;
 import com.example.excel.dto.NhMonth;
-import com.example.excel.service.NhService;
+import com.example.excel.service.excel.NhService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

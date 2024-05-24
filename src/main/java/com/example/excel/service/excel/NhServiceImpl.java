@@ -1,10 +1,10 @@
-package com.example.excel.service;
+package com.example.excel.service.excel;
 
-import com.example.excel.domain.Crop;
-import com.example.excel.domain.Nh;
+import com.example.excel.domain.excel.Crop;
+import com.example.excel.domain.excel.Nh;
 import com.example.excel.dto.ExcelDTO;
-import com.example.excel.repository.CropRepository;
-import com.example.excel.repository.NhRepository;
+import com.example.excel.repository.excel.CropRepository;
+import com.example.excel.repository.excel.NhRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -68,8 +68,8 @@ public class NhServiceImpl implements NhService {
                         .date(date)
                         .investigator(investigator)
                         .contractor(contractor)
-                        .month(month)
-                        .bad("미정")
+                        .surveyMonth(month)
+                        .recordMatch("미정")
                         .build());
             }
         }
@@ -78,8 +78,8 @@ public class NhServiceImpl implements NhService {
     public List<ExcelDTO> equalNh(String month) {
 
         List<Crop> excelDTOList = new ArrayList<>();
-        List<Crop> cropData = cropRepository.findByMonth(month);
-        List<Nh> nhData = nhRepository.findByMonth(month);
+        List<Crop> cropData = cropRepository.findBySurveyMonth(month);
+        List<Nh> nhData = nhRepository.findBySurveyMonth(month);
 
         for (Crop crop : cropData) {
             boolean foundMatch = false;
@@ -108,13 +108,13 @@ public class NhServiceImpl implements NhService {
 
     public List<Nh> getNhDate(String month) {
 
-        return nhRepository.findByMonth(month);
+        return nhRepository.findBySurveyMonth(month);
     }
 
     public List<Nh> getNonMatchingNh(String month) {
 
-        List<Crop> cropData = cropRepository.findByMonth(month);
-        List<Nh> nhData = nhRepository.findByMonth(month);
+        List<Crop> cropData = cropRepository.findBySurveyMonth(month);
+        List<Nh> nhData = nhRepository.findBySurveyMonth(month);
 
         for (Nh nh : nhData) {
 
@@ -127,7 +127,7 @@ public class NhServiceImpl implements NhService {
                         nh.getTargetNumber().equals(crop.getTargetNumber()) &&
                         nh.getContractor().equals(crop.getContractor()) &&
                         nh.getAccidentNumber().equals(crop.getAccidentNumber()) &&
-                        nh.getMonth().equals(crop.getMonth())
+                        nh.getSurveyMonth().equals(crop.getSurveyMonth())
                 ) {
                     nhRepository.save(Nh.builder()
                                     .id(nh.getId())
@@ -139,13 +139,13 @@ public class NhServiceImpl implements NhService {
                                     .targetNumber(nh.getTargetNumber())
                                     .contractor(nh.getContractor())
                                     .accidentNumber(nh.getAccidentNumber())
-                                    .month(nh.getMonth())
-                                    .bad("일치").build());
+                                    .surveyMonth(nh.getSurveyMonth())
+                                    .recordMatch("일치").build());
                 }
             }
         }
         return nhData.stream()
-                .filter(nh -> nh.getBad().equals("일치"))
+                .filter(nh -> nh.getRecordMatch().equals("일치"))
                 .collect(Collectors.toList());
     }
 }

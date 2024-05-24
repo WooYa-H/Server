@@ -1,4 +1,4 @@
-package com.example.excel.domain;
+package com.example.excel.domain.excel;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,7 +17,7 @@ public class Crop {
     @Column(name = "crop_id")
     private Long id;
 
-    private String month;
+    private String surveyMonth;
 
     private String item;
 

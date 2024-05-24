@@ -1,6 +1,6 @@
 package com.example.excel.dto;
 
-import com.example.excel.domain.Crop;
+import com.example.excel.domain.excel.Crop;
 import lombok.*;
 
 @NoArgsConstructor
@@ -29,7 +29,7 @@ public class ExcelDTO {
     private String contractor;
 
     public ExcelDTO(Crop crop) {
-        this.month = crop.getMonth();
+        this.month = crop.getSurveyMonth();
         this.item = crop.getItem();
         this.name = crop.getName();
         this.accidentNumber = crop.getAccidentNumber();

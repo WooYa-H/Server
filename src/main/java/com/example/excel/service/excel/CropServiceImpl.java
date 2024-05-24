@@ -1,11 +1,9 @@
-package com.example.excel.service;
+package com.example.excel.service.excel;
 
-import com.example.excel.domain.Crop;
-import com.example.excel.dto.ExcelDTO;
-import com.example.excel.repository.CropRepository;
+import com.example.excel.domain.excel.Crop;
+import com.example.excel.repository.excel.CropRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -65,7 +63,7 @@ public class CropServiceImpl implements CropService{
                         .date(date)
                         .investigator(shortInvestigator)
                         .contractor(contractor)
-                        .month(month)
+                        .surveyMonth(month)
                         .build());
             }
         }

@@ -1,6 +1,6 @@
-package com.example.excel.repository;
+package com.example.excel.repository.excel;
 
-import com.example.excel.domain.Crop;
+import com.example.excel.domain.excel.Crop;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +10,5 @@ import java.util.List;
 public interface CropRepository extends JpaRepository<Crop, Long> {
 
 
-    List<Crop> findByMonth(String month);
+    List<Crop> findBySurveyMonth(String month);
 }
