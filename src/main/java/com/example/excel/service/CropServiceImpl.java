@@ -29,7 +29,6 @@ public class CropServiceImpl implements CropService{
                 DataFormatter formatter = new DataFormatter();
                 XSSFRow row = worksheet.getRow(i);
 
-
                 int emptyCellCount = 0;
 
 //                for (int j = 0; j < row.getLastCellNum(); j++) {
