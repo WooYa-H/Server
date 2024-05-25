@@ -1,6 +1,7 @@
 package com.example.GP.service.Gongjeong;
 
 import com.example.GP.domain.Gongjeong.Company;
+import com.example.GP.dto.Gongjeong.CompanyDTO;
 import com.example.GP.dto.Gongjeong.CreateCompanyDTO;
 import com.example.GP.repository.Gongjeong.CompanyRepository;
 import com.example.GP.exception.Gonjeong.CompanyException;
@@ -36,22 +37,23 @@ public class CompanyServiceImpl implements CompanyService{
         return  company;
     }
 
-    private Company getCompany(Long id) {
+    public CompanyDTO getCompany(Long id) {
 
         Company company = companyRepository.findById(id)
                 .orElseThrow(() -> new CompanyException(ErrorCode.COMPANY_NOT_FOUND));
 
-        return company;
+
+        return new CompanyDTO(company);
     }
 
-    private List<Company> getAllCompany(Long id) {
+    public List<Company> getAllCompany(Long id) {
 
          List<Company> companyList = companyRepository.findAll();
 
          return companyList;
     }
 
-    private void deleteCompany(Long id) {
+    public void deleteCompany(Long id) {
         Company company = companyRepository.findById(id)
                 .orElseThrow(() -> new CompanyException(ErrorCode.COMPANY_NOT_FOUND));
 
