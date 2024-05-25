@@ -1,6 +1,7 @@
 package com.example.exception.Gonjeong;
 
 
+import com.example.type.ErrorCode;
 import lombok.*;
 
 @Getter
@@ -10,8 +11,13 @@ import lombok.*;
 @Builder
 public class CompanyException extends RuntimeException {
 
-    private ErrorC;
+    private ErrorCode errorCode;
+    private String errorMessage;
 
-    public CompanyException(ErrorCode
-                            )
+    public CompanyException(ErrorCode errorCode) {
+    this.errorCode = errorCode;
+    this.errorMessage = errorCode.getDescription();
+    }
 }
+
+
