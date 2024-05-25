@@ -50,6 +50,13 @@ public class CompanyServiceImpl implements CompanyService{
          return companyList;
     }
 
+    private void deleteCompany(Long id) {
+        Company company = companyRepository.findById(id)
+                .orElseThrow(() -> new CompanyException(ErrorCode.COMPANY_NOT_FOUND));
+
+        companyRepository.deleteById(company.getId());
+    }
+
 
 
 
