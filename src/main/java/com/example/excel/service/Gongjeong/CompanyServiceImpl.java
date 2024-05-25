@@ -42,4 +42,15 @@ public class CompanyServiceImpl implements CompanyService{
 
         return company;
     }
+
+    private List<Company> getAllCompany(Long id) {
+
+         List<Company> companyList = companyRepository.findAll();
+
+         return companyList;
+    }
+
+
+
+
 }
