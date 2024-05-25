@@ -32,4 +32,12 @@ public class CompanyServiceImpl implements CompanyService{
 
         return companyRepository.save(company);
     }
+
+    private Company getCompany(Company companyId) {
+
+        Company company = companyRepository.findById(companyId.getId())
+                .orElseThrow(() -> new CompanyException(ErrorCode.COMPANY_NOT_FOUND));
+
+        return company;
+    }
 }
