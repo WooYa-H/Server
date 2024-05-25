@@ -19,7 +19,7 @@ public class Company {
 
     private String name;
 
-    private String chief;
+    private String ceo;
 
     private String address;
 
