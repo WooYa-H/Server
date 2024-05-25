@@ -13,4 +13,6 @@ public interface CompanyService {
     CompanyDTO getCompany(Long id);
 
     List<Company> getAllCompany();
+
+    void deleteCompany(Long id);
 }

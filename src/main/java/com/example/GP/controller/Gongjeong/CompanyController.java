@@ -3,6 +3,7 @@ package com.example.GP.controller.Gongjeong;
 import com.example.GP.domain.Gongjeong.Company;
 import com.example.GP.dto.Gongjeong.CompanyDTO;
 import com.example.GP.dto.Gongjeong.CreateCompanyDTO;
+import com.example.GP.dto.Gongjeong.DeleteCompanyDTO;
 import com.example.GP.service.Gongjeong.CompanyService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,15 @@ public class CompanyController {
     public ResponseEntity<List<Company>> getCompanies() {
 
         return ResponseEntity.ok(companyService.getAllCompany());
+    }
+
+    @PostMapping("/company/delete")
+    public ResponseEntity<DeleteCompanyDTO.Response> deleteCompany(
+            @Valid @RequestBody DeleteCompanyDTO.Request request) {
+
+        companyService.deleteCompany(request.getCompanyId());
+
+        return ResponseEntity.ok(DeleteCompanyDTO.Response.from());
     }
 
 
