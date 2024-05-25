@@ -8,6 +8,8 @@ import com.example.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService{
@@ -33,9 +35,9 @@ public class CompanyServiceImpl implements CompanyService{
         return companyRepository.save(company);
     }
 
-    private Company getCompany(Company companyId) {
+    private Company getCompany(Long id) {
 
-        Company company = companyRepository.findById(companyId.getId())
+        Company company = companyRepository.findById(id)
                 .orElseThrow(() -> new CompanyException(ErrorCode.COMPANY_NOT_FOUND));
 
         return company;
