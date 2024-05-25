@@ -46,7 +46,7 @@ public class CompanyServiceImpl implements CompanyService{
         return new CompanyDTO(company);
     }
 
-    public List<Company> getAllCompany(Long id) {
+    public List<Company> getAllCompany() {
 
          List<Company> companyList = companyRepository.findAll();
 

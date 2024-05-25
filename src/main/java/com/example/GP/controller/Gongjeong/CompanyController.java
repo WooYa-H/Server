@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class CompanyController {
@@ -29,6 +31,12 @@ public class CompanyController {
             @Valid @RequestParam("companyId") Long companyId) {
 
         return ResponseEntity.ok(companyService.getCompany(companyId));
+    }
+
+    @GetMapping("/companies")
+    public ResponseEntity<List<Company>> getCompanies() {
+
+        return ResponseEntity.ok(companyService.getAllCompany());
     }
 
 
