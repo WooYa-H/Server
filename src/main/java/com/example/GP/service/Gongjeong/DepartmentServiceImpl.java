@@ -2,6 +2,7 @@ package com.example.GP.service.Gongjeong;
 
 import com.example.GP.domain.Gongjeong.Department;
 import com.example.GP.dto.Gongjeong.CreateDepartmentDTO;
+import com.example.GP.dto.Gongjeong.DepartmentDTO;
 import com.example.GP.exception.Gonjeong.DepartmentException;
 import com.example.GP.repository.Gongjeong.DepartmentRepository;
 import com.example.GP.type.ErrorCode;
@@ -29,5 +30,14 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .build());
 
         return department;
+    }
+
+    public DepartmentDTO getDepartment(Long id) {
+
+        Department department = departmentRepository.findById(id).orElseThrow(
+                () -> new DepartmentException(ErrorCode.DEPARTMENT_NOT_FOUND));
+
+
+        return new DepartmentDTO(department);
     }
 }
