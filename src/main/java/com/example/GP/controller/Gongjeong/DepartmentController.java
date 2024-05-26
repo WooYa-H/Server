@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class DepartmentController {
@@ -29,5 +31,11 @@ public class DepartmentController {
             @RequestParam("departmentId") Long departmentId) {
 
         return ResponseEntity.ok(departmentService.getDepartment(departmentId));
+    }
+
+    @GetMapping("/departments")
+    public ResponseEntity<List<DepartmentDTO>> getAllDepartment() {
+
+        return ResponseEntity.ok(departmentService.getAllDepartment());
     }
 }

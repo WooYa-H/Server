@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +39,23 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department department = departmentRepository.findById(id).orElseThrow(
                 () -> new DepartmentException(ErrorCode.DEPARTMENT_NOT_FOUND));
 
-
         return new DepartmentDTO(department);
+    }
+
+    public List<DepartmentDTO> getAllDepartment() {
+
+       return departmentRepository.findAll()
+               .stream()
+               .map(department -> {
+                   DepartmentDTO departmentDTO = new DepartmentDTO();
+                   departmentDTO.setId(department.getId());
+                   departmentDTO.setDepartmentName(department.getDepartmentName());
+                   departmentDTO.setDepartmentHead(department.getDepartmentHead());
+                   departmentDTO.setCreateAt(department.getCreateAt());
+                   departmentDTO.setUpdateAt(department.getUpdateAt());
+                   return departmentDTO;
+               })
+               .collect(Collectors.toList());
+
     }
 }
