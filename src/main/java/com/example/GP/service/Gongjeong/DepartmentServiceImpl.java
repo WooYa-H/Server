@@ -56,6 +56,13 @@ public class DepartmentServiceImpl implements DepartmentService {
                    return departmentDTO;
                })
                .collect(Collectors.toList());
+    }
 
+    public void deleteDepartment(Long id) {
+
+        departmentRepository.findById(id).orElseThrow(
+                () -> new DepartmentException(ErrorCode.DEPARTMENT_NOT_FOUND));
+
+        departmentRepository.deleteById(id);
     }
 }
