@@ -46,4 +46,12 @@ public class UserServiceImpl implements UserService {
                 })
                 .collect(Collectors.toList());
     }
+
+    public void deleteUser(Long id) {
+
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new UserException(ErrorCode.USER_NOT_FOUND));
+
+        userRepository.deleteById(user.getId());
+    }
 }

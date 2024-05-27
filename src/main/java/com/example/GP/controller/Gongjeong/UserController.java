@@ -1,6 +1,7 @@
 package com.example.GP.controller.Gongjeong;
 
 import com.example.GP.dto.Gongjeong.CreateUserDTO;
+import com.example.GP.dto.Gongjeong.DeleteUserDTO;
 import com.example.GP.dto.Gongjeong.UserDTO;
 import com.example.GP.service.Gongjeong.UserService;
 import jakarta.validation.Valid;
@@ -35,5 +36,14 @@ public class UserController {
     public ResponseEntity<List<UserDTO>> getAllUsers() {
 
         return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @PostMapping("/user/delete")
+    public ResponseEntity<DeleteUserDTO.Response> deleteUser(
+            @RequestBody DeleteUserDTO.Request request) {
+
+        userService.deleteUser(request.getId());
+
+        return ResponseEntity.ok(DeleteUserDTO.Response.from());
     }
 }
