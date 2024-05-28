@@ -2,6 +2,7 @@ package com.example.GP.controller.Gongjeong;
 
 import com.example.GP.dto.Gongjeong.CreateUserDTO;
 import com.example.GP.dto.Gongjeong.DeleteUserDTO;
+import com.example.GP.dto.Gongjeong.UpdateUserDTO;
 import com.example.GP.dto.Gongjeong.UserDTO;
 import com.example.GP.service.Gongjeong.UserService;
 import jakarta.validation.Valid;
@@ -45,5 +46,13 @@ public class UserController {
         userService.deleteUser(request.getId());
 
         return ResponseEntity.ok(DeleteUserDTO.Response.from());
+    }
+
+    @PutMapping("/user/update")
+    public ResponseEntity<UpdateUserDTO.Response> updateUser(
+            @Valid @RequestBody UpdateUserDTO.Request request) {
+
+        return ResponseEntity.ok(UpdateUserDTO.Response.from(
+                userService.updateUser(request)));
     }
 }

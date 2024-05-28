@@ -2,6 +2,7 @@ package com.example.GP.service.Gongjeong;
 
 import com.example.GP.domain.Gongjeong.User;
 import com.example.GP.dto.Gongjeong.CreateUserDTO;
+import com.example.GP.dto.Gongjeong.UpdateUserDTO;
 import com.example.GP.dto.Gongjeong.UserDTO;
 import com.example.GP.exception.Gonjeong.UserException;
 import com.example.GP.repository.Gongjeong.UserRepository;
@@ -55,4 +56,16 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(user.getId());
     }
 
+    public User updateUser(UpdateUserDTO.Request request) {
+
+        User user = userRepository.findById(request.getId()).orElseThrow(
+                () -> new UserException(ErrorCode.USER_NOT_FOUND));
+
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setPhoneNumber(request.getPhoneNumber());
+        user.setUpdateAt(LocalDateTime.now());
+
+        return userRepository.save(user);
+    }
 }
