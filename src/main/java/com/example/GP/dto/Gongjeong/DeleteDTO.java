@@ -2,7 +2,7 @@ package com.example.GP.dto.Gongjeong;
 
 import lombok.*;
 
-public class DeleteCompanyDTO {
+public class DeleteDTO {
 
     @NoArgsConstructor
     @AllArgsConstructor
@@ -11,7 +11,8 @@ public class DeleteCompanyDTO {
     @Builder
     public static class Request {
 
-        private Long companyId;
+        private Long id;
+
     }
 
     @NoArgsConstructor
@@ -23,8 +24,8 @@ public class DeleteCompanyDTO {
 
         private String ok;
 
-        public static Response from() {
-            return Response.builder()
+        public static DeleteDTO.Response from() {
+            return DeleteDTO.Response.builder()
                     .ok("삭제 완료")
                     .build();
         }

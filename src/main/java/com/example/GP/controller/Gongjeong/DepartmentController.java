@@ -1,8 +1,7 @@
 package com.example.GP.controller.Gongjeong;
 
-import com.example.GP.dto.Gongjeong.CreateCompanyDTO;
 import com.example.GP.dto.Gongjeong.CreateDepartmentDTO;
-import com.example.GP.dto.Gongjeong.DeleteDepartmentDTO;
+import com.example.GP.dto.Gongjeong.DeleteDTO;
 import com.example.GP.dto.Gongjeong.DepartmentDTO;
 import com.example.GP.service.Gongjeong.DepartmentService;
 import jakarta.validation.Valid;
@@ -41,10 +40,10 @@ public class DepartmentController {
     }
 
     @PostMapping("/department/delete")
-    public ResponseEntity<DeleteDepartmentDTO.Response> deleteDepartment(
+    public ResponseEntity<DeleteDTO.Response> deleteDepartment(
             @Valid @RequestParam("departmentId") Long departmentId) {
         departmentService.deleteDepartment(departmentId);
 
-        return ResponseEntity.ok(DeleteDepartmentDTO.Response.from());
+        return ResponseEntity.ok(DeleteDTO.Response.from());
     }
 }

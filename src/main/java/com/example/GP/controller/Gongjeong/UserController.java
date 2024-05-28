@@ -1,7 +1,7 @@
 package com.example.GP.controller.Gongjeong;
 
 import com.example.GP.dto.Gongjeong.CreateUserDTO;
-import com.example.GP.dto.Gongjeong.DeleteUserDTO;
+import com.example.GP.dto.Gongjeong.DeleteDTO;
 import com.example.GP.dto.Gongjeong.UpdateUserDTO;
 import com.example.GP.dto.Gongjeong.UserDTO;
 import com.example.GP.service.Gongjeong.UserService;
@@ -40,12 +40,12 @@ public class UserController {
     }
 
     @PostMapping("/user/delete")
-    public ResponseEntity<DeleteUserDTO.Response> deleteUser(
-            @RequestBody DeleteUserDTO.Request request) {
+    public ResponseEntity<DeleteDTO.Response> deleteUser(
+            @RequestBody DeleteDTO.Request request) {
 
         userService.deleteUser(request.getId());
 
-        return ResponseEntity.ok(DeleteUserDTO.Response.from());
+        return ResponseEntity.ok(DeleteDTO.Response.from());
     }
 
     @PutMapping("/user/update")
