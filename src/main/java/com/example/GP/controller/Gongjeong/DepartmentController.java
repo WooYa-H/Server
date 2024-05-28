@@ -1,8 +1,9 @@
 package com.example.GP.controller.Gongjeong;
 
-import com.example.GP.dto.Gongjeong.CreateDepartmentDTO;
-import com.example.GP.dto.Gongjeong.DeleteDTO;
+import com.example.GP.dto.Gongjeong.Create.CreateDepartmentDTO;
+import com.example.GP.dto.Gongjeong.Delete.DeleteDTO;
 import com.example.GP.dto.Gongjeong.DepartmentDTO;
+import com.example.GP.dto.Gongjeong.Update.UpdateDepartmentDTO;
 import com.example.GP.service.Gongjeong.DepartmentService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -45,5 +46,13 @@ public class DepartmentController {
         departmentService.deleteDepartment(departmentId);
 
         return ResponseEntity.ok(DeleteDTO.Response.from());
+    }
+
+    @PutMapping("/department/update")
+    public ResponseEntity<UpdateDepartmentDTO.Response> updateDepartment(
+            @Valid @RequestBody UpdateDepartmentDTO.Request request) {
+
+        return ResponseEntity.ok(
+                UpdateDepartmentDTO.Response.from(departmentService.updateDepartment(request)));
     }
 }

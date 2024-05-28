@@ -1,9 +1,13 @@
 package com.example.GP.service.Gongjeong;
 
+import com.example.GP.domain.Gongjeong.Company;
 import com.example.GP.domain.Gongjeong.Department;
-import com.example.GP.dto.Gongjeong.CreateDepartmentDTO;
+import com.example.GP.dto.Gongjeong.Create.CreateDepartmentDTO;
 import com.example.GP.dto.Gongjeong.DepartmentDTO;
+import com.example.GP.dto.Gongjeong.Update.UpdateDepartmentDTO;
+import com.example.GP.exception.Gonjeong.CompanyException;
 import com.example.GP.exception.Gonjeong.DepartmentException;
+import com.example.GP.repository.Gongjeong.CompanyRepository;
 import com.example.GP.repository.Gongjeong.DepartmentRepository;
 import com.example.GP.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +22,7 @@ import java.util.stream.Collectors;
 public class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentRepository departmentRepository;
+    private final CompanyRepository companyRepository;
 
     public Department createDepartment(CreateDepartmentDTO.Request request) {
 
@@ -64,5 +69,21 @@ public class DepartmentServiceImpl implements DepartmentService {
                 () -> new DepartmentException(ErrorCode.DEPARTMENT_NOT_FOUND));
 
         departmentRepository.deleteById(id);
+    }
+
+    public Department updateDepartment(UpdateDepartmentDTO.Request request) {
+
+        Department department = departmentRepository.findById(request.getId())
+                .orElseThrow(() -> new DepartmentException(ErrorCode.DEPARTMENT_NOT_FOUND));
+
+        Company company = companyRepository.findById(request.getCompanyId())
+                .orElseThrow(() -> new CompanyException(ErrorCode.COMPANY_NOT_FOUND));
+
+        department.setDepartmentName(request.getDepartmentName());
+        department.setDepartmentHead(request.getDepartmentHead());
+        department.setCompany(company);
+        department.setUpdateAt(LocalDateTime.now());
+
+        return departmentRepository.save(department);
     }
 }
