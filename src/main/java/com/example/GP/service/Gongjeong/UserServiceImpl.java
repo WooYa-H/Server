@@ -1,8 +1,8 @@
 package com.example.GP.service.Gongjeong;
 
 import com.example.GP.domain.Gongjeong.User;
-import com.example.GP.dto.Gongjeong.CreateUserDTO;
-import com.example.GP.dto.Gongjeong.UpdateUserDTO;
+import com.example.GP.dto.Gongjeong.Create.CreateUserDTO;
+import com.example.GP.dto.Gongjeong.Update.UpdateUserDTO;
 import com.example.GP.dto.Gongjeong.UserDTO;
 import com.example.GP.exception.Gonjeong.UserException;
 import com.example.GP.repository.Gongjeong.UserRepository;

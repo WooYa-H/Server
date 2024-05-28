@@ -1,8 +1,8 @@
 package com.example.GP.controller.Gongjeong;
 
-import com.example.GP.dto.Gongjeong.CreateUserDTO;
-import com.example.GP.dto.Gongjeong.DeleteDTO;
-import com.example.GP.dto.Gongjeong.UpdateUserDTO;
+import com.example.GP.dto.Gongjeong.Create.CreateUserDTO;
+import com.example.GP.dto.Gongjeong.Delete.DeleteDTO;
+import com.example.GP.dto.Gongjeong.Update.UpdateUserDTO;
 import com.example.GP.dto.Gongjeong.UserDTO;
 import com.example.GP.service.Gongjeong.UserService;
 import jakarta.validation.Valid;

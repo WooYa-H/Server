@@ -1,4 +1,4 @@
-package com.example.GP.dto.Gongjeong;
+package com.example.GP.dto.Gongjeong.Create;
 
 import com.example.GP.domain.Gongjeong.Department;
 import lombok.*;

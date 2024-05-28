@@ -2,7 +2,7 @@ package com.example.GP.service.Gongjeong;
 
 import com.example.GP.domain.Gongjeong.Company;
 import com.example.GP.dto.Gongjeong.CompanyDTO;
-import com.example.GP.dto.Gongjeong.CreateCompanyDTO;
+import com.example.GP.dto.Gongjeong.Create.CreateCompanyDTO;
 import com.example.GP.repository.Gongjeong.CompanyRepository;
 import com.example.GP.exception.Gonjeong.CompanyException;
 import com.example.GP.type.ErrorCode;

@@ -1,4 +1,4 @@
-package com.example.GP.dto.Gongjeong;
+package com.example.GP.dto.Gongjeong.Update;
 
 import com.example.GP.domain.Gongjeong.User;
 import lombok.*;

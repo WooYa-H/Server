@@ -2,8 +2,8 @@ package com.example.GP.controller.Gongjeong;
 
 import com.example.GP.domain.Gongjeong.Company;
 import com.example.GP.dto.Gongjeong.CompanyDTO;
-import com.example.GP.dto.Gongjeong.CreateCompanyDTO;
-import com.example.GP.dto.Gongjeong.DeleteDTO;
+import com.example.GP.dto.Gongjeong.Create.CreateCompanyDTO;
+import com.example.GP.dto.Gongjeong.Delete.DeleteDTO;
 import com.example.GP.service.Gongjeong.CompanyService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
