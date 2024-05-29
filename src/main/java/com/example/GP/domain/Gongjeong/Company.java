@@ -1,7 +1,11 @@
 package com.example.GP.domain.Gongjeong;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,4 +32,8 @@ public class Company {
     private String email;
 
     private String phoneNumber;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    private List<Department> departments;
 }
