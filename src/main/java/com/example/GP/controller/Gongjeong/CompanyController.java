@@ -4,6 +4,7 @@ import com.example.GP.domain.Gongjeong.Company;
 import com.example.GP.dto.Gongjeong.CompanyDTO;
 import com.example.GP.dto.Gongjeong.Create.CreateCompanyDTO;
 import com.example.GP.dto.Gongjeong.Delete.DeleteDTO;
+import com.example.GP.dto.Gongjeong.Update.UpdateCompanyDTO;
 import com.example.GP.service.Gongjeong.CompanyService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -47,6 +48,14 @@ public class CompanyController {
         companyService.deleteCompany(request.getId());
 
         return ResponseEntity.ok(DeleteDTO.Response.from());
+    }
+
+    @PutMapping("/company/update")
+    public ResponseEntity<UpdateCompanyDTO.Response> updateCompany(
+            @Valid @RequestBody UpdateCompanyDTO.Request request) {
+
+        return ResponseEntity.ok(UpdateCompanyDTO.Response.from(
+                companyService.updateCompany(request)));
     }
 
 

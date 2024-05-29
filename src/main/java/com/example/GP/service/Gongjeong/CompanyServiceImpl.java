@@ -3,6 +3,7 @@ package com.example.GP.service.Gongjeong;
 import com.example.GP.domain.Gongjeong.Company;
 import com.example.GP.dto.Gongjeong.CompanyDTO;
 import com.example.GP.dto.Gongjeong.Create.CreateCompanyDTO;
+import com.example.GP.dto.Gongjeong.Update.UpdateCompanyDTO;
 import com.example.GP.repository.Gongjeong.CompanyRepository;
 import com.example.GP.exception.Gonjeong.CompanyException;
 import com.example.GP.type.ErrorCode;
@@ -58,6 +59,21 @@ public class CompanyServiceImpl implements CompanyService{
                 .orElseThrow(() -> new CompanyException(ErrorCode.COMPANY_NOT_FOUND));
 
         companyRepository.deleteById(company.getId());
+    }
+
+    public Company updateCompany(UpdateCompanyDTO.Request request) {
+
+        Company company = companyRepository.findById(request.getId())
+                .orElseThrow(() -> new CompanyException(ErrorCode.COMPANY_NOT_FOUND));
+
+        company.setId(request.getId());
+        company.setName(request.getName());
+        company.setAddress(request.getAddress());
+        company.setEmail(request.getEmail());
+        company.setBusinessNumber(request.getBusinessNumber());
+        company.setPhoneNumber(request.getPhoneNumber());
+
+        return companyRepository.save(company);
     }
 
 
