@@ -2,7 +2,10 @@ package com.example.GP.dto.Gongjeong;
 
 
 import com.example.GP.domain.Gongjeong.Company;
+import com.example.GP.domain.Gongjeong.Department;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,7 +28,9 @@ public class CompanyDTO {
 
     private String phoneNumber;
 
-    public CompanyDTO(Company company) {
+    private List<DepartmentDTO> departmentList;
+
+    public CompanyDTO(Company company, List<DepartmentDTO> departmentList) {
         this.id = company.getId();
         this.name = company.getName();
         this.ceo = company.getCeo();
@@ -33,5 +38,6 @@ public class CompanyDTO {
         this.businessNumber = company.getBusinessNumber();
         this.email = company.getEmail();
         this.phoneNumber = company.getPhoneNumber();
+        this.departmentList = departmentList;
     }
 }

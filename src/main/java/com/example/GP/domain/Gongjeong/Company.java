@@ -33,7 +33,4 @@ public class Company {
 
     private String phoneNumber;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    private List<Department> departments;
 }
