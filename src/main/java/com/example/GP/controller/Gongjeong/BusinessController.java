@@ -1,13 +1,12 @@
 package com.example.GP.controller.Gongjeong;
 
+import com.example.GP.dto.Gongjeong.BusinessDTO;
 import com.example.GP.dto.Gongjeong.Create.CreateBusinessDTO;
 import com.example.GP.service.Gongjeong.BusinessService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -21,5 +20,12 @@ public class BusinessController {
 
         return ResponseEntity.ok(CreateBusinessDTO.Response.from(
                 businessService.createBusiness(request)));
+    }
+
+    @GetMapping("/business")
+    public ResponseEntity<BusinessDTO> getBusiness(
+            @RequestParam("businessId") Long id) {
+
+        return ResponseEntity.ok(businessService.getBusinessById(id));
     }
 }

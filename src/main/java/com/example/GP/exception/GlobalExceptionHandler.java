@@ -1,6 +1,7 @@
 package com.example.GP.exception;
 
 import com.example.GP.dto.error.ErrorResponse;
+import com.example.GP.exception.Gonjeong.BusinessException;
 import com.example.GP.exception.Gonjeong.CompanyException;
 import com.example.GP.exception.Gonjeong.DepartmentException;
 import com.example.GP.exception.Gonjeong.UserException;
@@ -28,6 +29,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CompanyException.class)
     public ErrorResponse handleCompanyException(CompanyException e) {
+        log.error("{} is occurred !", e.getErrorCode());
+        return new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ErrorResponse handleBusinessException(BusinessException e) {
         log.error("{} is occurred !", e.getErrorCode());
         return new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
     }
