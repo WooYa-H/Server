@@ -21,6 +21,10 @@ public class BusinessServiceImpl implements BusinessService {
 
     public Business createBusiness(CreateBusinessDTO.Request request) {
 
+        if (businessRepository.existsByBusinessName(request.getBusinessName())) {
+            throw new BusinessException(ErrorCode.BUSINESS_NAME_DUPLICATED);
+        }
+
         return businessRepository.save(Business.builder()
                 .businessName(request.getBusinessName())
                 .agency(request.getAgency())
