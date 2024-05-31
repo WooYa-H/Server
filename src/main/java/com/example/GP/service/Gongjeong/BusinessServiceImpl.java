@@ -9,6 +9,9 @@ import com.example.GP.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class BusinessServiceImpl implements BusinessService {
@@ -30,5 +33,14 @@ public class BusinessServiceImpl implements BusinessService {
                 () -> new BusinessException(ErrorCode.BUSINESS_NOT_FOUND));
 
         return new BusinessDTO(business);
+    }
+
+    public List<BusinessDTO> getAllBusiness() {
+
+        List<Business> businessList = businessRepository.findAll();
+
+        return businessList.stream()
+                .map(BusinessDTO::new)
+                .collect(Collectors.toList());
     }
 }

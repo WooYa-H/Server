@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class BusinessController {
@@ -27,5 +29,11 @@ public class BusinessController {
             @RequestParam("businessId") Long id) {
 
         return ResponseEntity.ok(businessService.getBusinessById(id));
+    }
+
+    @GetMapping("/businesses")
+    public ResponseEntity<List<BusinessDTO>> getBusinesses() {
+
+        return ResponseEntity.ok(businessService.getAllBusiness());
     }
 }
