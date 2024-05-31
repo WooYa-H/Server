@@ -2,6 +2,7 @@ package com.example.GP.controller.Gongjeong;
 
 import com.example.GP.dto.Gongjeong.BusinessDTO;
 import com.example.GP.dto.Gongjeong.Create.CreateBusinessDTO;
+import com.example.GP.dto.Gongjeong.Update.UpdateBusinessDTO;
 import com.example.GP.service.Gongjeong.BusinessService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -35,5 +36,13 @@ public class BusinessController {
     public ResponseEntity<List<BusinessDTO>> getBusinesses() {
 
         return ResponseEntity.ok(businessService.getAllBusiness());
+    }
+
+    @PutMapping("/business")
+    public ResponseEntity<UpdateBusinessDTO.Response> updateBusiness(
+            @Valid @RequestBody UpdateBusinessDTO.Request request) {
+
+        return ResponseEntity.ok(UpdateBusinessDTO.Response.from(
+                businessService.updateBusiness(request)));
     }
 }

@@ -3,6 +3,7 @@ package com.example.GP.service.Gongjeong;
 import com.example.GP.domain.Gongjeong.Business;
 import com.example.GP.dto.Gongjeong.BusinessDTO;
 import com.example.GP.dto.Gongjeong.Create.CreateBusinessDTO;
+import com.example.GP.dto.Gongjeong.Update.UpdateBusinessDTO;
 import com.example.GP.exception.Gonjeong.BusinessException;
 import com.example.GP.repository.Gongjeong.BusinessRepository;
 import com.example.GP.type.ErrorCode;
@@ -46,5 +47,16 @@ public class BusinessServiceImpl implements BusinessService {
         return businessList.stream()
                 .map(BusinessDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    public Business updateBusiness(UpdateBusinessDTO.Request request) {
+
+        Business business = businessRepository.findById(request.getId()).orElseThrow(
+                () -> new BusinessException(ErrorCode.BUSINESS_NOT_FOUND));
+
+        business.setBusinessName(request.getBusinessName());
+        business.setAgency(request.getAgency());
+
+        return businessRepository.save(business);
     }
 }
