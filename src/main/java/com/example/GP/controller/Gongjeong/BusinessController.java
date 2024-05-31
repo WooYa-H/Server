@@ -2,6 +2,7 @@ package com.example.GP.controller.Gongjeong;
 
 import com.example.GP.dto.Gongjeong.BusinessDTO;
 import com.example.GP.dto.Gongjeong.Create.CreateBusinessDTO;
+import com.example.GP.dto.Gongjeong.Delete.DeleteDTO;
 import com.example.GP.dto.Gongjeong.Update.UpdateBusinessDTO;
 import com.example.GP.service.Gongjeong.BusinessService;
 import jakarta.validation.Valid;
@@ -44,5 +45,14 @@ public class BusinessController {
 
         return ResponseEntity.ok(UpdateBusinessDTO.Response.from(
                 businessService.updateBusiness(request)));
+    }
+
+    @DeleteMapping("/business/delete")
+    public ResponseEntity<DeleteDTO.Response> deleteBusiness(
+            @Valid @RequestBody DeleteDTO.Request request) {
+
+        businessService.deleteBusiness(request.getId());
+
+        return ResponseEntity.ok(DeleteDTO.Response.from());
     }
 }

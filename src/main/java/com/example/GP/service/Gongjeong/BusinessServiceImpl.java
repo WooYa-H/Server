@@ -59,4 +59,12 @@ public class BusinessServiceImpl implements BusinessService {
 
         return businessRepository.save(business);
     }
+
+    public void deleteBusiness(Long id) {
+
+        businessRepository.findById(id).orElseThrow(
+                () -> new BusinessException(ErrorCode.BUSINESS_NOT_FOUND));
+
+        businessRepository.deleteById(id);
+    }
 }

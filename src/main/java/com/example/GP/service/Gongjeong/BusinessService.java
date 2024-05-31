@@ -16,4 +16,6 @@ public interface BusinessService {
     List<BusinessDTO> getAllBusiness();
 
     Business updateBusiness(UpdateBusinessDTO.Request request);
+
+    void deleteBusiness(Long id);
 }
