@@ -47,7 +47,7 @@ public class BusinessController {
                 businessService.updateBusiness(request)));
     }
 
-    @DeleteMapping("/business/delete")
+    @PostMapping("/business/delete")
     public ResponseEntity<DeleteDTO.Response> deleteBusiness(
             @Valid @RequestBody DeleteDTO.Request request) {
 
