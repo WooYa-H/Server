@@ -2,6 +2,7 @@ package com.example.GP.service.Gongjeong;
 
 import com.example.GP.domain.Gongjeong.Team;
 import com.example.GP.dto.Gongjeong.Create.CreateTeamDTO;
+import com.example.GP.dto.Gongjeong.TeamDTO;
 import com.example.GP.exception.Gonjeong.TeamException;
 import com.example.GP.repository.Gongjeong.TeamRepository;
 import com.example.GP.type.ErrorCode;
@@ -25,5 +26,13 @@ public class TeamServiceImpl implements TeamService {
                 .teamName(request.getTeamName())
                 .leader(request.getLeader())
                 .build());
+    }
+
+    public TeamDTO getTeam(Long id) {
+
+        Team team = teamRepository.findById(id).orElseThrow(
+                () -> new TeamException(ErrorCode.TEAM_NOT_FOUND));
+
+        return new TeamDTO(team);
     }
 }

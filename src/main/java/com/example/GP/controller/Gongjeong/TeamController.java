@@ -1,13 +1,12 @@
 package com.example.GP.controller.Gongjeong;
 
 import com.example.GP.dto.Gongjeong.Create.CreateTeamDTO;
+import com.example.GP.dto.Gongjeong.TeamDTO;
 import com.example.GP.service.Gongjeong.TeamService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -22,5 +21,12 @@ public class TeamController {
 
         return ResponseEntity.ok(CreateTeamDTO.Response.from(
                 teamService.createTeam(request)));
+    }
+
+    @GetMapping("/team")
+    public ResponseEntity<TeamDTO> getTeam(
+            @RequestParam("teamId") Long id) {
+
+        return ResponseEntity.ok(teamService.getTeam(id));
     }
 }
