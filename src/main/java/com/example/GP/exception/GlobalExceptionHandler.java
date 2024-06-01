@@ -1,10 +1,7 @@
 package com.example.GP.exception;
 
 import com.example.GP.dto.error.ErrorResponse;
-import com.example.GP.exception.Gonjeong.BusinessException;
-import com.example.GP.exception.Gonjeong.CompanyException;
-import com.example.GP.exception.Gonjeong.DepartmentException;
-import com.example.GP.exception.Gonjeong.UserException;
+import com.example.GP.exception.Gonjeong.*;
 import com.example.GP.type.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -35,6 +32,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
     public ErrorResponse handleBusinessException(BusinessException e) {
+        log.error("{} is occurred !", e.getErrorCode());
+        return new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
+    }
+
+    @ExceptionHandler(TeamException.class)
+    public ErrorResponse handleTeamException(TeamException e) {
         log.error("{} is occurred !", e.getErrorCode());
         return new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
     }
