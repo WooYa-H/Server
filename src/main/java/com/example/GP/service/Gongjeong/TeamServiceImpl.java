@@ -47,4 +47,9 @@ public class TeamServiceImpl implements TeamService {
                 .map(TeamDTO::new)
                 .collect(Collectors.toUnmodifiableList());
     }
+
+    public void deleteTeam(Long id) {
+
+        teamRepository.deleteById(id);
+    }
 }

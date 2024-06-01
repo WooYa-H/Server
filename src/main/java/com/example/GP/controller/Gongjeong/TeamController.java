@@ -1,6 +1,7 @@
 package com.example.GP.controller.Gongjeong;
 
 import com.example.GP.dto.Gongjeong.Create.CreateTeamDTO;
+import com.example.GP.dto.Gongjeong.Delete.DeleteDTO;
 import com.example.GP.dto.Gongjeong.TeamDTO;
 import com.example.GP.service.Gongjeong.TeamService;
 import jakarta.validation.Valid;
@@ -36,5 +37,14 @@ public class TeamController {
     public ResponseEntity<List<TeamDTO>> getAllteams(){
 
         return ResponseEntity.ok(teamService.getAllTeam());
+    }
+
+    @PostMapping("/team/delete")
+    public ResponseEntity<DeleteDTO.Response> deleteTeam(
+            @Valid @RequestBody DeleteDTO.Request request) {
+
+        teamService.deleteTeam(request.getId());
+
+        return ResponseEntity.ok(DeleteDTO.Response.from());
     }
 }
