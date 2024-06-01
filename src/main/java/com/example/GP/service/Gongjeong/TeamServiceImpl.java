@@ -9,6 +9,9 @@ import com.example.GP.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class TeamServiceImpl implements TeamService {
@@ -34,5 +37,14 @@ public class TeamServiceImpl implements TeamService {
                 () -> new TeamException(ErrorCode.TEAM_NOT_FOUND));
 
         return new TeamDTO(team);
+    }
+
+    public List<TeamDTO> getAllTeam() {
+
+        List<Team> teamList = teamRepository.findAll();
+
+        return teamList.stream()
+                .map(TeamDTO::new)
+                .collect(Collectors.toUnmodifiableList());
     }
 }

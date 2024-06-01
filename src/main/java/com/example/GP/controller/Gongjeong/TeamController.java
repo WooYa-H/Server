@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class TeamController {
@@ -28,5 +30,11 @@ public class TeamController {
             @RequestParam("teamId") Long id) {
 
         return ResponseEntity.ok(teamService.getTeam(id));
+    }
+
+    @GetMapping("/teams")
+    public ResponseEntity<List<TeamDTO>> getAllteams(){
+
+        return ResponseEntity.ok(teamService.getAllTeam());
     }
 }
