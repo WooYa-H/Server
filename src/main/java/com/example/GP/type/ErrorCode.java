@@ -14,6 +14,8 @@ public enum ErrorCode {
     USER_DUPLICATED("회원이 이미 존재합니다"),
     BUSINESS_NOT_FOUND("사업을 찾을 수 없습니다"),
     BUSINESS_NAME_DUPLICATED("사업명이 이미 존재합니다"),
+    TEAM_NAME_DUPLICATED("팀명이 이미 존재합니다."),
+    TEAM_NOT_FOUND("팀을 찾을 수 없습니다"),
     INVALID_REQUEST("잘못된 요청입니다."),
     INTERNAL_SERVER_ERROR("내부 서버 오류가 발생했습니다.");
 
