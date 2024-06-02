@@ -17,6 +17,8 @@ public enum ErrorCode {
     TEAM_NAME_DUPLICATED("팀명이 이미 존재합니다."),
     TEAM_NOT_FOUND("팀을 찾을 수 없습니다"),
     INVALID_REQUEST("잘못된 요청입니다."),
+    TEAM_MEMBER_NAME_DUPLICATED("팀원이 이미 존재합니다."),
+    TEAM_MEMBER_NOT_FOUND("팀원을 찾을 수 없습니다"),
     INTERNAL_SERVER_ERROR("내부 서버 오류가 발생했습니다.");
 
     private final String Description;

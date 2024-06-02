@@ -42,6 +42,12 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
     }
 
+    @ExceptionHandler(TeamMemberException.class)
+    public ErrorResponse handleTeamException(TeamMemberException e) {
+        log.error("{} is occurred !", e.getErrorCode());
+        return new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
+    }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ErrorResponse handleDataIntegrityViolationExceptionException(DataIntegrityViolationException e) {
 
