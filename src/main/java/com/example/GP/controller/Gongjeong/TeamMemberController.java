@@ -1,5 +1,6 @@
 package com.example.GP.controller.Gongjeong;
 
+import com.example.GP.domain.Gongjeong.TeamMember;
 import com.example.GP.dto.Gongjeong.Create.CreateTeamMemberDTO;
 import com.example.GP.dto.Gongjeong.TeamMemberDTO;
 import com.example.GP.service.Gongjeong.TeamMemberService;
@@ -7,6 +8,8 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -27,6 +30,12 @@ public class TeamMemberController {
             @RequestParam("teammemberId") Long id) {
 
         return ResponseEntity.ok(teamMemberService.getTeamMember(id));
+    }
+
+    @GetMapping("/teammembers")
+    public ResponseEntity<List<TeamMember>> getAllTeamMember() {
+
+        return ResponseEntity.ok(teamMemberService.getAllTeamMember());
     }
 
 

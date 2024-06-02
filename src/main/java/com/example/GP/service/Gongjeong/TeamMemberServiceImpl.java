@@ -9,6 +9,9 @@ import com.example.GP.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class TeamMemberServiceImpl implements TeamMemberService {
@@ -29,6 +32,13 @@ public class TeamMemberServiceImpl implements TeamMemberService {
                 () -> new TeamMemberException(ErrorCode.TEAM_MEMBER_NOT_FOUND));
 
         return new TeamMemberDTO(teamMember);
+    }
+
+    public List<TeamMember> getAllTeamMember() {
+
+        List<TeamMember> teamMemberDTOList = teamMemberRepository.findAll();
+
+        return teamMemberDTOList;
     }
 
 
