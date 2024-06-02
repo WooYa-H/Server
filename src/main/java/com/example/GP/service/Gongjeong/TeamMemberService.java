@@ -13,4 +13,6 @@ public interface TeamMemberService {
     TeamMemberDTO getTeamMember(Long id);
 
     List<TeamMember> getAllTeamMember();
+
+    void deleteTeamMember(Long id);
 }

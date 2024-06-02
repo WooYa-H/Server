@@ -41,5 +41,13 @@ public class TeamMemberServiceImpl implements TeamMemberService {
         return teamMemberDTOList;
     }
 
+    public void deleteTeamMember(Long id) {
+
+        teamMemberRepository.findById(id).orElseThrow(
+                () -> new TeamMemberException(ErrorCode.TEAM_MEMBER_NOT_FOUND));
+
+        teamMemberRepository.deleteById(id);
+    }
+
 
 }
