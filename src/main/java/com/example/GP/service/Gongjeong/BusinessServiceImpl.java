@@ -1,11 +1,14 @@
 package com.example.GP.service.Gongjeong;
 
 import com.example.GP.domain.Gongjeong.Business;
+import com.example.GP.domain.Gongjeong.Team;
 import com.example.GP.dto.Gongjeong.BusinessDTO;
 import com.example.GP.dto.Gongjeong.Create.CreateBusinessDTO;
+import com.example.GP.dto.Gongjeong.TeamDTO;
 import com.example.GP.dto.Gongjeong.Update.UpdateBusinessDTO;
 import com.example.GP.exception.Gonjeong.BusinessException;
 import com.example.GP.repository.Gongjeong.BusinessRepository;
+import com.example.GP.repository.Gongjeong.TeamRepository;
 import com.example.GP.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,7 @@ import java.util.stream.Collectors;
 public class BusinessServiceImpl implements BusinessService {
 
     private final BusinessRepository businessRepository;
+    private final TeamRepository teamRepository;
 
 
     public Business createBusiness(CreateBusinessDTO.Request request) {
@@ -37,7 +41,11 @@ public class BusinessServiceImpl implements BusinessService {
         Business business = businessRepository.findById(id).orElseThrow(
                 () -> new BusinessException(ErrorCode.BUSINESS_NOT_FOUND));
 
-        return new BusinessDTO(business);
+        List<TeamDTO> teamDTOList = teamRepository.findByBusinessId(business.getId()).stream()
+                .map(TeamDTO::new)
+                .collect(Collectors.toList());
+
+        return new BusinessDTO(business, teamDTOList);
     }
 
     public List<BusinessDTO> getAllBusiness() {
