@@ -4,6 +4,7 @@ import com.example.GP.domain.Gongjeong.TeamMember;
 import com.example.GP.dto.Gongjeong.Create.CreateTeamMemberDTO;
 import com.example.GP.dto.Gongjeong.Delete.DeleteDTO;
 import com.example.GP.dto.Gongjeong.TeamMemberDTO;
+import com.example.GP.dto.Gongjeong.Update.UpdateTeamMemberDTO;
 import com.example.GP.service.Gongjeong.TeamMemberService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -48,5 +49,12 @@ public class TeamMemberController {
         return ResponseEntity.ok(DeleteDTO.Response.from());
     }
 
+    @PutMapping("/teammember")
+    public ResponseEntity<UpdateTeamMemberDTO.Response> updateTeamMember(
+            @Valid @RequestBody UpdateTeamMemberDTO.Request request) {
+
+        return ResponseEntity.ok(UpdateTeamMemberDTO.Response.from(
+                teamMemberService.updateTeamMember(request)));
+    }
 
 }

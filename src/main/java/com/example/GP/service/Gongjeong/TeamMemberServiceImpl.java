@@ -3,6 +3,7 @@ package com.example.GP.service.Gongjeong;
 import com.example.GP.domain.Gongjeong.TeamMember;
 import com.example.GP.dto.Gongjeong.Create.CreateTeamMemberDTO;
 import com.example.GP.dto.Gongjeong.TeamMemberDTO;
+import com.example.GP.dto.Gongjeong.Update.UpdateTeamMemberDTO;
 import com.example.GP.exception.Gonjeong.TeamMemberException;
 import com.example.GP.repository.Gongjeong.TeamMemberRepository;
 import com.example.GP.type.ErrorCode;
@@ -47,6 +48,16 @@ public class TeamMemberServiceImpl implements TeamMemberService {
                 () -> new TeamMemberException(ErrorCode.TEAM_MEMBER_NOT_FOUND));
 
         teamMemberRepository.deleteById(id);
+    }
+
+    public TeamMember updateTeamMember(UpdateTeamMemberDTO.Request request) {
+
+        TeamMember teamMember = teamMemberRepository.findById(request.getId()).orElseThrow(
+                () -> new TeamMemberException(ErrorCode.TEAM_MEMBER_NOT_FOUND));
+
+        teamMember.setTeamRank(request.getTeamRank());
+
+        return teamMemberRepository.save(teamMember);
     }
 
 
