@@ -1,9 +1,13 @@
 package com.example.GP.service.Gongjeong;
 
+import com.example.GP.domain.Gongjeong.Business;
 import com.example.GP.domain.Gongjeong.Team;
 import com.example.GP.dto.Gongjeong.Create.CreateTeamDTO;
 import com.example.GP.dto.Gongjeong.TeamDTO;
+import com.example.GP.dto.Gongjeong.Update.UpdateTeamDTO;
+import com.example.GP.exception.Gonjeong.BusinessException;
 import com.example.GP.exception.Gonjeong.TeamException;
+import com.example.GP.repository.Gongjeong.BusinessRepository;
 import com.example.GP.repository.Gongjeong.TeamRepository;
 import com.example.GP.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +22,7 @@ public class TeamServiceImpl implements TeamService {
 
 
     private final TeamRepository teamRepository;
+    private final BusinessRepository businessRepository;
 
 
     public Team createTeam(CreateTeamDTO.Request request) {
@@ -51,5 +56,20 @@ public class TeamServiceImpl implements TeamService {
     public void deleteTeam(Long id) {
 
         teamRepository.deleteById(id);
+    }
+
+    public Team updateTeam(UpdateTeamDTO.Request request) {
+
+        Team team = teamRepository.findById(request.getId()).orElseThrow(
+                () -> new TeamException(ErrorCode.TEAM_NOT_FOUND));
+
+        Business business = businessRepository.findById(request.getBusinessId()).orElseThrow(
+                () -> new BusinessException(ErrorCode.BUSINESS_NOT_FOUND));
+
+        team.setTeamName(request.getTeamName());
+        team.setBusiness(business);
+        team.setLeader(request.getLeader());
+
+        return teamRepository.save(team);
     }
 }
