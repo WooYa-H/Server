@@ -1,5 +1,6 @@
 package com.example.GP.domain.Gongjeong;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,5 +21,10 @@ public class Business {
     private String businessName;
 
     private String agency;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id")
+    private Department department;
 
 }
