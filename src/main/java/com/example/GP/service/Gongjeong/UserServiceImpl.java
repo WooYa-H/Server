@@ -11,7 +11,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,12 +22,18 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
     public User createUser(CreateUserDTO.Request request) {
+
+        int currentYear = LocalDateTime.now().getYear();
+        String yearString = String.valueOf(currentYear);
+        String lastTwoDigits = yearString.substring(yearString.length() -2);
+        String phoneNumber = request.getPhoneNumber().substring(request.getPhoneNumber().length() - 8);
 
         return userRepository.save(User.builder()
                 .name(request.getName())
+                .phoneNumber(request.getPhoneNumber())
                 .createAt(LocalDateTime.now())
+                .employeeNumber(lastTwoDigits + phoneNumber)
                 .build());
     }
 

@@ -14,6 +14,8 @@ public class CreateUserDTO {
 
         private String name;
 
+        private String phoneNumber;
+
     }
 
     @NoArgsConstructor

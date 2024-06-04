@@ -27,6 +27,8 @@ public class User {
 
     private String phoneNumber;
 
+    private String employeeNumber;
+
     @CreatedDate
     private LocalDateTime createAt;
 
