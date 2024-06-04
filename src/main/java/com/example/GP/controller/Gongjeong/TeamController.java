@@ -3,6 +3,7 @@ package com.example.GP.controller.Gongjeong;
 import com.example.GP.dto.Gongjeong.Create.CreateTeamDTO;
 import com.example.GP.dto.Gongjeong.Delete.DeleteDTO;
 import com.example.GP.dto.Gongjeong.TeamDTO;
+import com.example.GP.dto.Gongjeong.TeamDTOS;
 import com.example.GP.dto.Gongjeong.Update.UpdateTeamDTO;
 import com.example.GP.service.Gongjeong.TeamService;
 import jakarta.validation.Valid;
@@ -28,7 +29,7 @@ public class TeamController {
     }
 
     @GetMapping("/team")
-    public ResponseEntity<TeamDTO> getTeam(
+    public ResponseEntity<TeamDTOS> getTeam(
             @RequestParam("teamId") Long id) {
 
         return ResponseEntity.ok(teamService.getTeam(id));

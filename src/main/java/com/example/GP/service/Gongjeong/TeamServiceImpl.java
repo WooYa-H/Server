@@ -2,12 +2,16 @@ package com.example.GP.service.Gongjeong;
 
 import com.example.GP.domain.Gongjeong.Business;
 import com.example.GP.domain.Gongjeong.Team;
+import com.example.GP.domain.Gongjeong.TeamMember;
 import com.example.GP.dto.Gongjeong.Create.CreateTeamDTO;
 import com.example.GP.dto.Gongjeong.TeamDTO;
+import com.example.GP.dto.Gongjeong.TeamDTOS;
+import com.example.GP.dto.Gongjeong.TeamMemberDTO;
 import com.example.GP.dto.Gongjeong.Update.UpdateTeamDTO;
 import com.example.GP.exception.Gonjeong.BusinessException;
 import com.example.GP.exception.Gonjeong.TeamException;
 import com.example.GP.repository.Gongjeong.BusinessRepository;
+import com.example.GP.repository.Gongjeong.TeamMemberRepository;
 import com.example.GP.repository.Gongjeong.TeamRepository;
 import com.example.GP.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +27,7 @@ public class TeamServiceImpl implements TeamService {
 
     private final TeamRepository teamRepository;
     private final BusinessRepository businessRepository;
+    private final TeamMemberRepository teamMemberRepository;
 
 
     public Team createTeam(CreateTeamDTO.Request request) {
@@ -36,12 +41,24 @@ public class TeamServiceImpl implements TeamService {
                 .build());
     }
 
-    public TeamDTO getTeam(Long id) {
+    public TeamDTOS getTeam(Long id) {
 
         Team team = teamRepository.findById(id).orElseThrow(
                 () -> new TeamException(ErrorCode.TEAM_NOT_FOUND));
 
-        return new TeamDTO(team);
+        List<TeamMemberDTO> teamMembers = teamMemberRepository.findAll()
+                .stream()
+                .map(teamMember -> {
+                    TeamMemberDTO teamMemberDTO = new TeamMemberDTO();
+                    teamMemberDTO.setId(teamMember.getId());
+                    teamMemberDTO.setTeamRank(teamMember.getTeamRank());
+                    teamMemberDTO.setEmployeeNumber(teamMember.getEmployeeNumber());
+                    return teamMemberDTO;
+                })
+                .collect(Collectors.toList());
+
+
+        return new TeamDTOS(team, teamMembers);
     }
 
     public List<TeamDTO> getAllTeam() {
@@ -50,7 +67,7 @@ public class TeamServiceImpl implements TeamService {
 
         return teamList.stream()
                 .map(TeamDTO::new)
-                .collect(Collectors.toUnmodifiableList());
+                .toList();
     }
 
     public void deleteTeam(Long id) {
