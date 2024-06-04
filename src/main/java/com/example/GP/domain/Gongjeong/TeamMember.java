@@ -1,5 +1,6 @@
 package com.example.GP.domain.Gongjeong;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,5 +19,12 @@ public class TeamMember {
     private Long id;
 
     private String teamRank;
+
+    private String employeeNumber;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team team;
 
 }

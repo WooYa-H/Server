@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface TeamMemberService {
 
-    TeamMember createTemMember(CreateTeamMemberDTO.Request request);
+    TeamMember createTeamMember(CreateTeamMemberDTO.Request request);
 
     TeamMemberDTO getTeamMember(Long id);
 

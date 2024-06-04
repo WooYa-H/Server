@@ -1,11 +1,16 @@
 package com.example.GP.service.Gongjeong;
 
+import com.example.GP.domain.Gongjeong.Team;
 import com.example.GP.domain.Gongjeong.TeamMember;
+import com.example.GP.domain.Gongjeong.User;
 import com.example.GP.dto.Gongjeong.Create.CreateTeamMemberDTO;
 import com.example.GP.dto.Gongjeong.TeamMemberDTO;
 import com.example.GP.dto.Gongjeong.Update.UpdateTeamMemberDTO;
+import com.example.GP.exception.Gonjeong.TeamException;
 import com.example.GP.exception.Gonjeong.TeamMemberException;
 import com.example.GP.repository.Gongjeong.TeamMemberRepository;
+import com.example.GP.repository.Gongjeong.TeamRepository;
+import com.example.GP.repository.Gongjeong.UserRepository;
 import com.example.GP.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,12 +23,24 @@ import java.util.stream.Collectors;
 public class TeamMemberServiceImpl implements TeamMemberService {
 
     private final TeamMemberRepository teamMemberRepository;
+    private final TeamRepository teamRepository;
+    private final UserRepository userRepository;
 
     //TODO : User 식별로 사번 만들기 - 동일인 구분을 위해서
-    public TeamMember createTemMember(CreateTeamMemberDTO.Request request) {
+    public TeamMember createTeamMember(CreateTeamMemberDTO.Request request) {
+
+        if (teamMemberRepository.existsByTeamIdAndEmployeeNumber(
+                request.getTeamId(), request.getEmployeeNumber())) {
+            throw new TeamMemberException(ErrorCode.TEAM_MEMBER_EXISTS);
+        }
+
+        Team team = teamRepository.findById(request.getTeamId()).orElseThrow(
+                () -> new TeamException(ErrorCode.TEAM_NOT_FOUND));
 
         return teamMemberRepository.save(TeamMember.builder()
                 .teamRank(request.getTeamRank())
+                .team(team)
+                .employeeNumber(request.getEmployeeNumber())
                 .build());
     }
 

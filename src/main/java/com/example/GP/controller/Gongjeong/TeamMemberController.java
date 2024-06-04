@@ -24,7 +24,7 @@ public class TeamMemberController {
             @Valid @RequestBody CreateTeamMemberDTO.Request request) {
 
         return ResponseEntity.ok(CreateTeamMemberDTO.Response.from(
-                teamMemberService.createTemMember(request)));
+                teamMemberService.createTeamMember(request)));
     }
 
     @GetMapping("/teammember")
