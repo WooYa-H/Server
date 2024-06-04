@@ -19,6 +19,8 @@ public class UpdateBusinessDTO {
 
         private String agency;
 
+        private Long departmentId;
+
     }
 
     @NoArgsConstructor

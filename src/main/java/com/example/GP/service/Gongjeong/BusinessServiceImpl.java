@@ -1,6 +1,7 @@
 package com.example.GP.service.Gongjeong;
 
 import com.example.GP.domain.Gongjeong.Business;
+import com.example.GP.domain.Gongjeong.Department;
 import com.example.GP.domain.Gongjeong.Team;
 import com.example.GP.dto.Gongjeong.BusinessDTO;
 import com.example.GP.dto.Gongjeong.Create.CreateBusinessDTO;
@@ -8,6 +9,7 @@ import com.example.GP.dto.Gongjeong.TeamDTO;
 import com.example.GP.dto.Gongjeong.Update.UpdateBusinessDTO;
 import com.example.GP.exception.Gonjeong.BusinessException;
 import com.example.GP.repository.Gongjeong.BusinessRepository;
+import com.example.GP.repository.Gongjeong.DepartmentRepository;
 import com.example.GP.repository.Gongjeong.TeamRepository;
 import com.example.GP.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ public class BusinessServiceImpl implements BusinessService {
 
     private final BusinessRepository businessRepository;
     private final TeamRepository teamRepository;
+    private final DepartmentRepository departmentRepository;
 
 
     public Business createBusiness(CreateBusinessDTO.Request request) {
@@ -62,8 +65,13 @@ public class BusinessServiceImpl implements BusinessService {
         Business business = businessRepository.findById(request.getId()).orElseThrow(
                 () -> new BusinessException(ErrorCode.BUSINESS_NOT_FOUND));
 
+        Department department = departmentRepository.findById(request.getDepartmentId()).orElseThrow(
+                () -> new BusinessException(ErrorCode.DEPARTMENT_NOT_FOUND));
+
+
         business.setBusinessName(request.getBusinessName());
         business.setAgency(request.getAgency());
+        business.setDepartment(department);
 
         return businessRepository.save(business);
     }
