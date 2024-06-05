@@ -40,4 +40,25 @@ public class CompanyDTO {
         this.phoneNumber = company.getPhoneNumber();
         this.departmentList = departmentList;
     }
+
+
+
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    @Builder
+    public static class UserResponse {
+
+        private Long id;
+
+        private String name;
+
+        public UserResponse(Company company) {
+            this.id = company.getId();
+            this.name = company.getName();
+        }
+
+    }
 }
