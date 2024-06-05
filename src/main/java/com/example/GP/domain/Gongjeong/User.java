@@ -1,5 +1,6 @@
 package com.example.GP.domain.Gongjeong;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -34,4 +35,9 @@ public class User {
 
     @LastModifiedDate
     private LocalDateTime updateAt;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
 }
