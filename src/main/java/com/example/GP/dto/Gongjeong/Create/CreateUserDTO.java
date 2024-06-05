@@ -16,6 +16,8 @@ public class CreateUserDTO {
 
         private String phoneNumber;
 
+        private Long companyId;
+
     }
 
     @NoArgsConstructor

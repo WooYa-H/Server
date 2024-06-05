@@ -1,10 +1,12 @@
 package com.example.GP.service.Gongjeong;
 
+import com.example.GP.domain.Gongjeong.Company;
 import com.example.GP.domain.Gongjeong.User;
 import com.example.GP.dto.Gongjeong.Create.CreateUserDTO;
 import com.example.GP.dto.Gongjeong.Update.UpdateUserDTO;
 import com.example.GP.dto.Gongjeong.UserDTO;
 import com.example.GP.exception.Gonjeong.UserException;
+import com.example.GP.repository.Gongjeong.CompanyRepository;
 import com.example.GP.repository.Gongjeong.UserRepository;
 import com.example.GP.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,8 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final CompanyRepository companyRepository;
+
     public User createUser(CreateUserDTO.Request request) {
 
         int currentYear = LocalDateTime.now().getYear();
@@ -29,11 +33,15 @@ public class UserServiceImpl implements UserService {
         String lastTwoDigits = yearString.substring(yearString.length() -2);
         String phoneNumber = request.getPhoneNumber().substring(request.getPhoneNumber().length() - 8);
 
+        Company company = companyRepository.findById(request.getCompanyId()).orElseThrow(
+                () -> new UserException(ErrorCode.COMPANY_NOT_FOUND));
+
         return userRepository.save(User.builder()
                 .name(request.getName())
                 .phoneNumber(request.getPhoneNumber())
                 .createAt(LocalDateTime.now())
                 .employeeNumber(lastTwoDigits + phoneNumber)
+                .company(company)
                 .build());
     }
 
