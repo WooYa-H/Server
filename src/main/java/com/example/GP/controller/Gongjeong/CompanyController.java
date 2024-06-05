@@ -1,6 +1,7 @@
 package com.example.GP.controller.Gongjeong;
 
 import com.example.GP.domain.Gongjeong.Company;
+import com.example.GP.domain.Gongjeong.User;
 import com.example.GP.dto.Gongjeong.CompanyDTO;
 import com.example.GP.dto.Gongjeong.Create.CreateCompanyDTO;
 import com.example.GP.dto.Gongjeong.Delete.DeleteDTO;
@@ -56,6 +57,13 @@ public class CompanyController {
 
         return ResponseEntity.ok(UpdateCompanyDTO.Response.from(
                 companyService.updateCompany(request)));
+    }
+
+    @GetMapping("/company/users")
+    public ResponseEntity<List<User>> getCompanyByUsers(
+            @RequestParam("companyId") Long companyId) {
+
+        return ResponseEntity.ok(companyService.getCompanyByUsers(companyId));
     }
 
 

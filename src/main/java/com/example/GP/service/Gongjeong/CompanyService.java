@@ -1,6 +1,7 @@
 package com.example.GP.service.Gongjeong;
 
 import com.example.GP.domain.Gongjeong.Company;
+import com.example.GP.domain.Gongjeong.User;
 import com.example.GP.dto.Gongjeong.CompanyDTO;
 import com.example.GP.dto.Gongjeong.Create.CreateCompanyDTO;
 import com.example.GP.dto.Gongjeong.Update.UpdateCompanyDTO;
@@ -18,4 +19,6 @@ public interface CompanyService {
     void deleteCompany(Long id);
 
     Company updateCompany(UpdateCompanyDTO.Request request);
+
+    List<User> getCompanyByUsers(Long id);
 }

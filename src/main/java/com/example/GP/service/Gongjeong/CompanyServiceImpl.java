@@ -2,6 +2,7 @@ package com.example.GP.service.Gongjeong;
 
 import com.example.GP.domain.Gongjeong.Company;
 import com.example.GP.domain.Gongjeong.Department;
+import com.example.GP.domain.Gongjeong.User;
 import com.example.GP.dto.Gongjeong.CompanyDTO;
 import com.example.GP.dto.Gongjeong.Create.CreateCompanyDTO;
 import com.example.GP.dto.Gongjeong.DepartmentDTO;
@@ -9,6 +10,7 @@ import com.example.GP.dto.Gongjeong.Update.UpdateCompanyDTO;
 import com.example.GP.repository.Gongjeong.CompanyRepository;
 import com.example.GP.exception.Gonjeong.CompanyException;
 import com.example.GP.repository.Gongjeong.DepartmentRepository;
+import com.example.GP.repository.Gongjeong.UserRepository;
 import com.example.GP.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,7 @@ public class CompanyServiceImpl implements CompanyService{
 
     private final CompanyRepository companyRepository;
     private final DepartmentRepository departmentRepository;
+    private final UserRepository userRepository;
 
 
     public Company createCompany(CreateCompanyDTO.Request request) {
@@ -83,6 +86,13 @@ public class CompanyServiceImpl implements CompanyService{
         company.setPhoneNumber(request.getPhoneNumber());
 
         return companyRepository.save(company);
+    }
+
+    public List<User> getCompanyByUsers(Long id) {
+
+        List<User> userList = userRepository.findByCompanyId(id);
+
+        return userList;
     }
 
 
