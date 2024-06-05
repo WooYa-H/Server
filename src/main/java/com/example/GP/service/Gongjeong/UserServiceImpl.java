@@ -78,9 +78,13 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(request.getId()).orElseThrow(
                 () -> new UserException(ErrorCode.USER_NOT_FOUND));
 
+        Company company = companyRepository.findById(request.getCompanyId()).orElseThrow(
+                () -> new UserException(ErrorCode.COMPANY_NOT_FOUND));
+
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPhoneNumber(request.getPhoneNumber());
+        user.setCompany(company);
         user.setUpdateAt(LocalDateTime.now());
 
         return userRepository.save(user);

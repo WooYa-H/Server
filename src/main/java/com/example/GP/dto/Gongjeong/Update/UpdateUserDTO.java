@@ -20,6 +20,8 @@ public class UpdateUserDTO {
 
         private String phoneNumber;
 
+        private Long companyId;
+
     }
 
     @NoArgsConstructor
@@ -33,6 +35,8 @@ public class UpdateUserDTO {
 
         private String name;
 
+        private Long companyId;
+
         private String ok;
 
         public static UpdateUserDTO.Response from(User user) {
@@ -40,6 +44,7 @@ public class UpdateUserDTO {
             return Response.builder()
                     .id(user.getId())
                     .name(user.getName())
+                    .companyId(user.getCompany().getId())
                     .ok("수정 완료")
                     .build();
         }
