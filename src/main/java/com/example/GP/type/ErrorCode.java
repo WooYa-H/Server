@@ -20,6 +20,7 @@ public enum ErrorCode {
     TEAM_MEMBER_NAME_DUPLICATED("팀원이 이미 존재합니다."),
     TEAM_MEMBER_NOT_FOUND("팀원을 찾을 수 없습니다."),
     TEAM_MEMBER_EXISTS("이미 팀멤버에 등록이 되어 있습니다."),
+    EMPLOYEE_NUMBER_NOT_FOUND("사원번호를 찾을 수 없습니다"),
     INTERNAL_SERVER_ERROR("내부 서버 오류가 발생했습니다.");
 
     private final String Description;
