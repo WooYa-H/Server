@@ -19,4 +19,6 @@ public interface UserService {
 
     User updateUser(UpdateUserDTO.Request request);
 
+    UserDTO getUserByEmployeeNumber(String employeeNumber);
+
 }

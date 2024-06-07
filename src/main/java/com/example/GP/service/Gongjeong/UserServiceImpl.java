@@ -89,4 +89,12 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.save(user);
     }
+
+    public UserDTO getUserByEmployeeNumber(String employeeNumber) {
+
+        User user = userRepository.findByEmployeeNumber(employeeNumber).orElseThrow(
+                () -> new UserException(ErrorCode.USER_NOT_FOUND));
+
+        return new UserDTO(user);
+    }
 }

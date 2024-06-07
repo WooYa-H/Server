@@ -55,4 +55,11 @@ public class UserController {
         return ResponseEntity.ok(UpdateUserDTO.Response.from(
                 userService.updateUser(request)));
     }
+
+    @GetMapping("/user/employee")
+    public ResponseEntity<UserDTO> getUserByEmployee(
+            @RequestParam("employee") String employeeNumber) {
+
+        return ResponseEntity.ok(userService.getUserByEmployeeNumber(employeeNumber));
+    }
 }
