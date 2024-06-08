@@ -76,7 +76,15 @@ public class TeamMemberServiceImpl implements TeamMemberService {
         TeamMember teamMember = teamMemberRepository.findById(request.getId()).orElseThrow(
                 () -> new TeamMemberException(ErrorCode.TEAM_MEMBER_NOT_FOUND));
 
+        Team team = teamRepository.findById(request.getTeamId()).orElseThrow(
+                () -> new TeamMemberException(ErrorCode.TEAM_NOT_FOUND));
+
+        User user = userRepository.findById(request.getUserId()).orElseThrow(
+                () -> new TeamMemberException(ErrorCode.USER_NOT_FOUND));
+
         teamMember.setTeamRank(request.getTeamRank());
+        teamMember.setTeam(team);
+        teamMember.setUser(user);
 
         return teamMemberRepository.save(teamMember);
     }

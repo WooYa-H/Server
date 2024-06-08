@@ -16,6 +16,10 @@ public class UpdateTeamMemberDTO {
 
         private String teamRank;
 
+        private Long teamId;
+
+        private Long userId;
+
     }
 
     @NoArgsConstructor
@@ -29,6 +33,10 @@ public class UpdateTeamMemberDTO {
 
         private String teamRank;
 
+        private Long teamId;
+
+        private Long userId;
+
         private String ok;
 
 
@@ -37,6 +45,8 @@ public class UpdateTeamMemberDTO {
             return Response.builder()
                     .id(teamMember.getId())
                     .teamRank(teamMember.getTeamRank())
+                    .teamId(teamMember.getTeam().getId())
+                    .userId(teamMember.getUser().getId())
                     .ok("수정 완료")
                     .build();
         }
