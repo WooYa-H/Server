@@ -27,4 +27,9 @@ public class TeamMember {
     @JoinColumn(name = "team_id")
     private Team team;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }
