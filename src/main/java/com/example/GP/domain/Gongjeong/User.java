@@ -36,8 +36,4 @@ public class User {
     @LastModifiedDate
     private LocalDateTime updateAt;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_id")
-    private Company company;
 }
