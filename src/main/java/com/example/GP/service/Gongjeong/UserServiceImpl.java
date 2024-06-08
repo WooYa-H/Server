@@ -41,7 +41,6 @@ public class UserServiceImpl implements UserService {
                 .phoneNumber(request.getPhoneNumber())
                 .createAt(LocalDateTime.now())
                 .employeeNumber(lastTwoDigits + phoneNumber)
-                .company(company)
                 .build());
     }
 
@@ -84,7 +83,6 @@ public class UserServiceImpl implements UserService {
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPhoneNumber(request.getPhoneNumber());
-        user.setCompany(company);
         user.setUpdateAt(LocalDateTime.now());
 
         return userRepository.save(user);

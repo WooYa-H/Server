@@ -59,12 +59,6 @@ public class CompanyController {
                 companyService.updateCompany(request)));
     }
 
-    @GetMapping("/company/users")
-    public ResponseEntity<List<User>> getCompanyByUsers(
-            @RequestParam("companyId") Long companyId) {
-
-        return ResponseEntity.ok(companyService.getCompanyByUsers(companyId));
-    }
 
 
 }

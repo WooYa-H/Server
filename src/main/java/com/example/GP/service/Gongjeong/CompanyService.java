@@ -20,5 +20,4 @@ public interface CompanyService {
 
     Company updateCompany(UpdateCompanyDTO.Request request);
 
-    List<User> getCompanyByUsers(Long id);
 }
