@@ -18,6 +18,8 @@ public class CreateTeamMemberDTO {
 
         private String employeeNumber;
 
+        private Long userId;
+
     }
 
 

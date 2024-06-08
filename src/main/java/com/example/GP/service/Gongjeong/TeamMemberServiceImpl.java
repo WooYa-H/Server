@@ -37,9 +37,13 @@ public class TeamMemberServiceImpl implements TeamMemberService {
         Team team = teamRepository.findById(request.getTeamId()).orElseThrow(
                 () -> new TeamException(ErrorCode.TEAM_NOT_FOUND));
 
+        User user = userRepository.findById(request.getUserId()).orElseThrow(
+                () -> new TeamMemberException(ErrorCode.USER_NOT_FOUND));
+
         return teamMemberRepository.save(TeamMember.builder()
                 .teamRank(request.getTeamRank())
                 .team(team)
+                .user(user)
                 .employeeNumber(request.getEmployeeNumber())
                 .build());
     }
