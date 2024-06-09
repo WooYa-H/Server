@@ -18,4 +18,6 @@ public interface BusinessRepository extends JpaRepository<Business, Long> {
 
     @Query("SELECT b FROM Business b WHERE b.department.id IN :departmentIds")
     List<Business> findAllByDepartmentIdIn(@Param("departmentIds") List<Long> departmentIds);
+
+    List<Business> findAllByDepartment_Id(Long departmentId);
 }

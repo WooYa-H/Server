@@ -132,4 +132,35 @@ public class UserServiceImpl implements UserService {
 
         return userDTOS;
     }
+
+    public List<UserDTO> getUsersByDepartment(Long departmentId) {
+
+        Department department = departmentRepository.findById(departmentId).orElseThrow(
+                () -> new UserException(ErrorCode.DEPARTMENT_NOT_FOUND));
+
+        List<Business> businesses = businessRepository.findAllByDepartment_Id(department.getId());
+
+        List<Long> businessIds = businesses.stream()
+                .map(Business::getId)
+                .collect(Collectors.toList());
+
+        List<Team> teams = teamRepository.findAllByBusinessIdIn(businessIds);
+
+        List<Long> teamIds = teams.stream()
+                .map(Team::getId)
+                .collect(Collectors.toList());
+
+        List<TeamMember> teamMembers = teamMemberRepository.findAllByTeamIdIn(teamIds);
+
+        List<Long> userIds = teamMembers.stream()
+                .map(TeamMember::getUser)
+                .map(User::getId)
+                .collect(Collectors.toList());
+
+        List<UserDTO> userDTOS = userRepository.findAllById(userIds).stream()
+                .map(user -> new UserDTO(user))
+                .collect(Collectors.toList());
+
+        return userDTOS;
+    }
 }

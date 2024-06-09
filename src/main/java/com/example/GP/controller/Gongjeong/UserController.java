@@ -69,4 +69,12 @@ public class UserController {
 
         return ResponseEntity.ok(userService.getUsersByCompany(companyId));
     }
+
+
+    @GetMapping("users/department")
+    public ResponseEntity<List<UserDTO>> getUsersByDepartment(
+            @RequestParam("departmentId") Long departmentId) {
+
+        return ResponseEntity.ok(userService.getUsersByDepartment(departmentId));
+    }
 }
