@@ -63,8 +63,7 @@ public class UserController {
 
         return ResponseEntity.ok(userService.getUserByEmployeeNumber(employeeNumber));
     }
-
-    @GetMapping("/user/company")
+    @GetMapping("/users/company")
     public ResponseEntity<List<UserDTO>> getUsersByCompany(
             @RequestParam("companyId") Long companyId) {
 
