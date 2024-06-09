@@ -1,5 +1,6 @@
 package com.example.GP.controller.Gongjeong;
 
+import com.example.GP.domain.Gongjeong.User;
 import com.example.GP.dto.Gongjeong.Create.CreateUserDTO;
 import com.example.GP.dto.Gongjeong.Delete.DeleteDTO;
 import com.example.GP.dto.Gongjeong.Update.UpdateUserDTO;
@@ -61,5 +62,12 @@ public class UserController {
             @RequestParam("employee") String employeeNumber) {
 
         return ResponseEntity.ok(userService.getUserByEmployeeNumber(employeeNumber));
+    }
+
+    @GetMapping("/user/company")
+    public ResponseEntity<List<UserDTO>> getUsersByCompany(
+            @RequestParam("companyId") Long companyId) {
+
+        return ResponseEntity.ok(userService.getUsersByCompany(companyId));
     }
 }

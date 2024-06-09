@@ -1,22 +1,18 @@
 package com.example.GP.service.Gongjeong;
 
-import com.example.GP.domain.Gongjeong.Company;
-import com.example.GP.domain.Gongjeong.User;
+import com.example.GP.domain.Gongjeong.*;
 import com.example.GP.dto.Gongjeong.Create.CreateUserDTO;
 import com.example.GP.dto.Gongjeong.Update.UpdateUserDTO;
 import com.example.GP.dto.Gongjeong.UserDTO;
 import com.example.GP.exception.Gonjeong.UserException;
-import com.example.GP.repository.Gongjeong.CompanyRepository;
-import com.example.GP.repository.Gongjeong.UserRepository;
+import com.example.GP.repository.Gongjeong.*;
 import com.example.GP.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +21,10 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final CompanyRepository companyRepository;
+    private final DepartmentRepository departmentRepository;
+    private final BusinessRepository businessRepository;
+    private final TeamRepository teamRepository;
+    private final TeamMemberRepository teamMemberRepository;
 
     public User createUser(CreateUserDTO.Request request) {
 
@@ -94,5 +94,42 @@ public class UserServiceImpl implements UserService {
                 () -> new UserException(ErrorCode.USER_NOT_FOUND));
 
         return new UserDTO(user);
+    }
+
+    public List<UserDTO> getUsersByCompany(Long companyId) {
+
+        Company company = companyRepository.findById(companyId).orElseThrow(
+                () -> new UserException(ErrorCode.COMPANY_NOT_FOUND));
+
+        List<Department> departments = departmentRepository.findAllByCompany_Id(company.getId());
+
+        List<Long> departmentIds = departments.stream()
+                .map(Department::getId)
+                .collect(Collectors.toList());
+
+        List<Business> businesses = businessRepository.findAllByDepartmentIdIn(departmentIds);
+
+        List<Long> businessIds = businesses.stream()
+                .map(Business::getId)
+                .collect(Collectors.toList());
+
+        List<Team> teams = teamRepository.findAllByBusinessIdIn(businessIds);
+
+        List<Long> teamIds = teams.stream()
+                .map(Team::getId)
+                .collect(Collectors.toList());
+
+        List<TeamMember> teamMembers = teamMemberRepository.findAllByTeamIdIn(teamIds);
+
+        List<Long> userIds = teamMembers.stream()
+                .map(TeamMember::getUser)
+                .map(User::getId)
+                .collect(Collectors.toList());
+
+        List<UserDTO> userDTOS = userRepository.findAllById(userIds).stream()
+                .map(user -> new UserDTO(user))
+                .collect(Collectors.toList());
+
+        return userDTOS;
     }
 }

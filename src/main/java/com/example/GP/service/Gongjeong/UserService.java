@@ -21,4 +21,5 @@ public interface UserService {
 
     UserDTO getUserByEmployeeNumber(String employeeNumber);
 
+    List<UserDTO> getUsersByCompany(Long companyId);
 }
