@@ -24,4 +24,6 @@ public interface UserService {
     List<UserDTO> getUsersByCompany(Long companyId);
 
     List<UserDTO> getUsersByDepartment(Long departmentId);
+
+    List<UserDTO> getUsersByBusiness(Long businessId);
 }
