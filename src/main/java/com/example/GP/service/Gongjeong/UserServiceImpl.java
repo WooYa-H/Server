@@ -126,11 +126,9 @@ public class UserServiceImpl implements UserService {
                 .map(User::getId)
                 .collect(Collectors.toList());
 
-        List<UserDTO> userDTOS = userRepository.findAllById(userIds).stream()
-                .map(user -> new UserDTO(user))
+        return userRepository.findAllById(userIds).stream()
+                .map(UserDTO::new)
                 .collect(Collectors.toList());
-
-        return userDTOS;
     }
 
     public List<UserDTO> getUsersByDepartment(Long departmentId) {
@@ -157,10 +155,8 @@ public class UserServiceImpl implements UserService {
                 .map(User::getId)
                 .collect(Collectors.toList());
 
-        List<UserDTO> userDTOS = userRepository.findAllById(userIds).stream()
-                .map(user -> new UserDTO(user))
+        return userRepository.findAllById(userIds).stream()
+                .map(UserDTO::new)
                 .collect(Collectors.toList());
-
-        return userDTOS;
     }
 }
