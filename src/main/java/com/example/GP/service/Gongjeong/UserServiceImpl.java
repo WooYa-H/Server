@@ -183,4 +183,22 @@ public class UserServiceImpl implements UserService {
                 .map(UserDTO::new)
                 .collect(Collectors.toList());
     }
+
+    public List<UserDTO> getUsersByTeam(Long teamId) {
+
+        Team team = teamRepository.findById(teamId).orElseThrow(
+                () -> new UserException(ErrorCode.TEAM_NOT_FOUND));
+
+        List<TeamMember> teamMembers = teamMemberRepository.findAllByTeam_Id(team.getId());
+
+        List<Long> userIds = teamMembers.stream()
+                .map(TeamMember::getUser)
+                .map(User::getId)
+                .collect(Collectors.toList());
+
+        return userRepository.findAllById(userIds).stream()
+                .map(UserDTO::new)
+                .collect(Collectors.toList());
+    }
+
 }
