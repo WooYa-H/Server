@@ -24,13 +24,13 @@ public class NhController {
         nhService.nhSaveExcel(file, month);
     }
 
-    @GetMapping("/result")
+    @PostMapping("/result")
     public ResponseEntity<List<Nh>> listExcel(@RequestBody @Valid NhMonth.Request request) {
 
         return ResponseEntity.ok(nhService.getNonMatchingNh(request.getMonth()));
     }
 
-    @GetMapping("/date")
+    @PostMapping("/date")
     public ResponseEntity<List<Nh>> getNhData(@RequestBody @Valid NhMonth.Request request) {
 
         return ResponseEntity.ok(nhService.getNhDate(request.getMonth()));
