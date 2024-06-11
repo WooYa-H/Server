@@ -71,10 +71,24 @@ public class UserController {
     }
 
 
-    @GetMapping("users/department")
+    @GetMapping("/users/department")
     public ResponseEntity<List<UserDTO>> getUsersByDepartment(
             @RequestParam("departmentId") Long departmentId) {
 
         return ResponseEntity.ok(userService.getUsersByDepartment(departmentId));
+    }
+
+    @GetMapping("/users/business")
+    public ResponseEntity<List<UserDTO>> getUsersByBusiness(
+            @RequestParam("businessId") Long businessId) {
+
+        return ResponseEntity.ok(userService.getUsersByBusiness(businessId));
+    }
+
+    @GetMapping("/users/team")
+    public ResponseEntity<List<UserDTO>> getUsersByTeam(
+            @RequestParam("teamId") Long teamId) {
+
+        return ResponseEntity.ok(userService.getUsersByTeam(teamId));
     }
 }

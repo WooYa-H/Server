@@ -12,6 +12,7 @@ public class CreateDepartmentDTO {
     @Builder
     public static class Request {
 
+        @NonNull
         private String departmentName;
 
         private String departmentHead;

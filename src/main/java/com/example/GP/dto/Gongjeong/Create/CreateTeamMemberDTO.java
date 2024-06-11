@@ -12,12 +12,15 @@ public class CreateTeamMemberDTO {
     @Builder
     public static class Request {
 
+        @NonNull
         private Long teamId;
 
+        @NonNull
         private String teamRank;
 
         private String employeeNumber;
 
+        @NonNull
         private Long userId;
 
     }

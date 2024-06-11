@@ -1,5 +1,6 @@
 package com.example.GP.dto.Gongjeong.Delete;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 public class DeleteDTO {
@@ -11,6 +12,7 @@ public class DeleteDTO {
     @Builder
     public static class Request {
 
+        @NotNull
         private Long id;
 
     }

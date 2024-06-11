@@ -12,6 +12,7 @@ public class CreateBusinessDTO {
     @Builder
     public static class Request {
 
+        @NonNull
         private String businessName;
 
         private String agency;

@@ -77,8 +77,8 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(request.getId()).orElseThrow(
                 () -> new UserException(ErrorCode.USER_NOT_FOUND));
 
-        Company company = companyRepository.findById(request.getCompanyId()).orElseThrow(
-                () -> new UserException(ErrorCode.COMPANY_NOT_FOUND));
+//        Company company = companyRepository.findById(request.getCompanyId()).orElseThrow(
+//                () -> new UserException(ErrorCode.COMPANY_NOT_FOUND));
 
         user.setName(request.getName());
         user.setEmail(request.getEmail());
@@ -126,11 +126,9 @@ public class UserServiceImpl implements UserService {
                 .map(User::getId)
                 .collect(Collectors.toList());
 
-        List<UserDTO> userDTOS = userRepository.findAllById(userIds).stream()
-                .map(user -> new UserDTO(user))
+        return userRepository.findAllById(userIds).stream()
+                .map(UserDTO::new)
                 .collect(Collectors.toList());
-
-        return userDTOS;
     }
 
     public List<UserDTO> getUsersByDepartment(Long departmentId) {
@@ -157,10 +155,50 @@ public class UserServiceImpl implements UserService {
                 .map(User::getId)
                 .collect(Collectors.toList());
 
-        List<UserDTO> userDTOS = userRepository.findAllById(userIds).stream()
-                .map(user -> new UserDTO(user))
+        return userRepository.findAllById(userIds).stream()
+                .map(UserDTO::new)
+                .collect(Collectors.toList());
+    }
+
+
+    public List<UserDTO> getUsersByBusiness(Long businessId) {
+
+        Business business = businessRepository.findById(businessId).orElseThrow(
+                () -> new UserException(ErrorCode.BUSINESS_NOT_FOUND));
+
+        List<Team> teams = teamRepository.findAllByBusiness_Id(business.getId());
+
+        List<Long> teamIds = teams.stream()
+                .map(Team::getId)
                 .collect(Collectors.toList());
 
-        return userDTOS;
+        List<TeamMember> teamMembers = teamMemberRepository.findAllByTeamIdIn(teamIds);
+
+        List<Long> userIds = teamMembers.stream()
+                .map(TeamMember::getUser)
+                .map(User::getId)
+                .collect(Collectors.toList());
+
+        return userRepository.findAllById(userIds).stream()
+                .map(UserDTO::new)
+                .collect(Collectors.toList());
     }
+
+    public List<UserDTO> getUsersByTeam(Long teamId) {
+
+        Team team = teamRepository.findById(teamId).orElseThrow(
+                () -> new UserException(ErrorCode.TEAM_NOT_FOUND));
+
+        List<TeamMember> teamMembers = teamMemberRepository.findAllByTeam_Id(team.getId());
+
+        List<Long> userIds = teamMembers.stream()
+                .map(TeamMember::getUser)
+                .map(User::getId)
+                .collect(Collectors.toList());
+
+        return userRepository.findAllById(userIds).stream()
+                .map(UserDTO::new)
+                .collect(Collectors.toList());
+    }
+
 }
