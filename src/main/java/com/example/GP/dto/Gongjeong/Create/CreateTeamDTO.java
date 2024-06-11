@@ -12,6 +12,7 @@ public class CreateTeamDTO {
     @Builder
     public static class Request {
 
+        @NonNull
         private String teamName;
 
         private String leader;

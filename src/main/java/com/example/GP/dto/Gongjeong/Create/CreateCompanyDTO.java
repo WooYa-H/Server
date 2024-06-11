@@ -13,8 +13,10 @@ public class CreateCompanyDTO {
     @Builder
     public static class Request {
 
+        @NonNull
         private String name;
 
+        @NonNull
         private String ceo;
 
         private String address;

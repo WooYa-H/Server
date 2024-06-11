@@ -12,10 +12,13 @@ public class CreateUserDTO {
     @Builder
     public static class Request {
 
+        @NonNull
         private String name;
 
+        @NonNull
         private String phoneNumber;
 
+        @NonNull
         private Long companyId;
 
     }
