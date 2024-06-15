@@ -2,6 +2,7 @@ package com.example.GP.exception;
 
 import com.example.GP.dto.error.ErrorResponse;
 import com.example.GP.exception.Gonjeong.*;
+import com.example.GP.exception.accountBook.ExpenseException;
 import com.example.GP.type.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -44,6 +45,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(TeamMemberException.class)
     public ErrorResponse handleTeamException(TeamMemberException e) {
+        log.error("{} is occurred !", e.getErrorCode());
+        return new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
+    }
+
+    @ExceptionHandler(ExpenseException.class)
+    public ErrorResponse handleExpenseException(ExpenseException e) {
         log.error("{} is occurred !", e.getErrorCode());
         return new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
     }
