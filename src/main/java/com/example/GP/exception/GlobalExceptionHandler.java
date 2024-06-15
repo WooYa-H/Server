@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(TeamMemberException.class)
-    public ErrorResponse handleTeamException(TeamMemberException e) {
+    public ErrorResponse handleTeamMemberException(TeamMemberException e) {
         log.error("{} is occurred !", e.getErrorCode());
         return new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
     }
